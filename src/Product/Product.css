@@ -1,0 +1,19 @@
+.productDiv{
+    display:flex;
+    border-bottom:1px solid lightgray;
+    padding: 5px;
+}
+
+.productDiv h4{   
+    color:rgb(38, 38, 175);
+}
+
+
+.productDiv button{
+    background-color: goldenrod;
+    height:30px;
+    width:200px;
+    border-radius:5px;
+    border:1px solid darkgrey;
+    cursor:pointer;
+}

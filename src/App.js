@@ -1,25 +1,16 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header/Header';//As it is an external component,it has been attached with this js file. single dot means they are in same folder, double dot means you have to go another folder
+import Shop from './components/Shop/Shop';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     <Header></Header>
+     <Shop></Shop>
+    
     </div>
-  );
+  )
 }
 
 export default App;
