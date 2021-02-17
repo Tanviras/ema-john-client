@@ -4,6 +4,7 @@ import "../../fakeData";
 import fakeData from '../../fakeData';
 import Product from '../../Product/Product'
 import Cart from '../Cart/Cart';
+import { addToDatabaseCart } from '../../utilities/databaseManager';
 
 
 const Shop = () => {
@@ -14,8 +15,12 @@ const Shop = () => {
 
 const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handler ekhane thakai valo jodio actual button ekhane nei.
     // console.log(`Product added`,product);
-    const newCart = [...cart,product];
+    const newCart = [...cart,product];//to bring all the elements of cart to newCart,use ...
     setCart(newCart);
+
+    const sameProduct= newCart.filter(pd=>pd.key===product.key);
+    const numberOfSameProduct= sameProduct.length;
+    addToDatabaseCart(product.key,numberOfSameProduct);
 };
     return (
         <div className="shop-container">
@@ -24,14 +29,11 @@ const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handl
            <div className="product-container">
                 {
                     products.map(pd => <Product
+                        showAddToCart={true}
                         handleAddProduct = {handleAddProduct}
                          product={pd}
+                         key={pd.key}
                          ></Product>)
-                         
-                    // fakeData(=products) er element gulo alada kore nibo map diye. ekek element er name dilam pd. Taderke send korlam <Product></Product> er moddhe(mane taderke niye component create korlam). 
-
-                    // <Product></Product> er vetore habijabi likhsi because of props purpose
-                    //props:product={pd}
                 }
             
            </div> {/* product-container */}

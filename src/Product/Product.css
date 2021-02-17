@@ -9,11 +9,15 @@
 }
 
 
-.productDiv button{
+.main-button{
     background-color: goldenrod;
     height:30px;
     width:200px;
     border-radius:5px;
     border:1px solid darkgrey;
     cursor:pointer;
+}
+
+.productName{
+    color:rgb(38, 38, 175);
 }
