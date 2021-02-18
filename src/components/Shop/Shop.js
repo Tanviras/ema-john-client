@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./Shop.css";
 import "../../fakeData";
 import fakeData from '../../fakeData';
 import Product from '../../Product/Product'
 import Cart from '../Cart/Cart';
-import { addToDatabaseCart } from '../../utilities/databaseManager';
+import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
+import { Link } from 'react-router-dom';
+
 
 
 const Shop = () => {
@@ -13,14 +15,38 @@ const Shop = () => {
 //   console.log(products);//products= data from fakeData
     const [cart,setCart]=useState([]);// initially 0 na diye faka array rakha good practice
 
+useEffect(()=>{
+const savedCart=getDatabaseCart();
+const productKeys= Object.keys(savedCart);
+const previousCart= productKeys.map(existingKey =>{
+    const product= fakeData.find(pd=>pd.key===existingKey);
+    product.quantity=savedCart[existingKey];
+    return product;
+})
+setCart(previousCart);
+},[])
+
+
+
 const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handler ekhane thakai valo jodio actual button ekhane nei.
     // console.log(`Product added`,product);
-    const newCart = [...cart,product];//to bring all the elements of cart to newCart,use ...
-    setCart(newCart);
+    const productToBeAdded=product.key;
+    const sameProduct= cart.find(pd=>pd.key===productToBeAdded);
 
-    const sameProduct= newCart.filter(pd=>pd.key===product.key);
-    const numberOfSameProduct= sameProduct.length;
-    addToDatabaseCart(product.key,numberOfSameProduct);
+    let count=1;
+    let newCart;
+    if(sameProduct){
+        count= sameProduct.quantity+1;
+        sameProduct.quantity=count; 
+        const others=cart.filter(pd=>pd.key!==productToBeAdded);
+        newCart=[...others,sameProduct];//filter gives output as an array
+    }
+    else{
+        product.quantity=1;
+        newCart = [...cart,product];
+    }
+    setCart(newCart);
+    addToDatabaseCart(product.key,count);
 };
     return (
         <div className="shop-container">
@@ -39,7 +65,10 @@ const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handl
            </div> {/* product-container */}
           
           <div className="cart-container">
-              <Cart cart={cart}></Cart>
+              <Cart cart={cart}>
+              <Link to="/orderReview"><button className="main-button">Review Order</button></Link>
+              </Cart>
+             
           </div>
             
         </div> 
