@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 
 const Product = (props) => {//Product function er input dilam "props"=fakeData theke recieved data
-console.log(props);
+// console.log(props);
 return (
         <div className="productDiv">
         <div> 

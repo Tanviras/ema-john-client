@@ -17,6 +17,7 @@ const Shop = () => {
 
 useEffect(()=>{
 const savedCart=getDatabaseCart();
+console.log(savedCart);
 const productKeys= Object.keys(savedCart);
 const previousCart= productKeys.map(existingKey =>{
     const product= fakeData.find(pd=>pd.key===existingKey);
@@ -27,6 +28,8 @@ setCart(previousCart);
 },[])
 
 
+
+//details of "add to cart" button
 
 const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handler ekhane thakai valo jodio actual button ekhane nei.
     // console.log(`Product added`,product);
@@ -48,6 +51,9 @@ const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handl
     setCart(newCart);
     addToDatabaseCart(product.key,count);
 };
+//end of details of "add to cart" button
+
+
     return (
         <div className="shop-container">
 
@@ -61,14 +67,12 @@ const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handl
                          key={pd.key}
                          ></Product>)
                 }
-            
            </div> {/* product-container */}
           
           <div className="cart-container">
               <Cart cart={cart}>
               <Link to="/orderReview"><button className="main-button">Review Order</button></Link>
               </Cart>
-             
           </div>
             
         </div> 
