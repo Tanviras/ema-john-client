@@ -1,83 +1,77 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from "react";
 import "./Shop.css";
-import "../../fakeData";
-import fakeData from '../../fakeData';
-import Product from '../../Product/Product'
-import Cart from '../Cart/Cart';
-import { addToDatabaseCart, getDatabaseCart } from '../../utilities/databaseManager';
-import { Link } from 'react-router-dom';
-
-
+import Product from "../Product/Product";
+import Cart from "../Cart/Cart";
+import { Link } from "react-router-dom";
+import {
+  addToDatabaseCart,
+  getDatabaseCart,
+} from "../../utilities/databaseManager";
 
 const Shop = () => {
-    const firstTen= fakeData.slice(0,10);
-    const [products, setProducts]= useState(firstTen);
-//   console.log(products);//products= data from fakeData
-    const [cart,setCart]=useState([]);// initially 0 na diye faka array rakha good practice
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState([]);
 
-useEffect(()=>{
-const savedCart=getDatabaseCart();
-console.log(savedCart);
-const productKeys= Object.keys(savedCart);
-const previousCart= productKeys.map(existingKey =>{
-    const product= fakeData.find(pd=>pd.key===existingKey);
-    product.quantity=savedCart[existingKey];
-    return product;
-})
-setCart(previousCart);
-},[])
+  useEffect(() => {
+    fetch("https://shrouded-sands-52244.herokuapp.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data));
+  }, []);
 
+  useEffect(() => {
+    const savedCart = getDatabaseCart();
+    const productKeys = Object.keys(savedCart);
+    fetch("https://shrouded-sands-52244.herokuapp.com/productsByKeys", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(productKeys),
+    })
+      .then((res) => res.json())
+      .then((data) => setCart(data));
+  }, []);
 
+  const handleAddProduct = (product) => {
+    const toBeAddedKey = product.key;
+    const sameProduct = cart.find((pd) => pd.key === toBeAddedKey);
 
-//details of "add to cart" button
-
-const handleAddProduct = (product) => {//setState ei Shop.js er moddhe,tai handler ekhane thakai valo jodio actual button ekhane nei.
-    // console.log(`Product added`,product);
-    const productToBeAdded=product.key;
-    const sameProduct= cart.find(pd=>pd.key===productToBeAdded);
-
-    let count=1;
+    let count = 1;
     let newCart;
-    if(sameProduct){
-        count= sameProduct.quantity+1;
-        sameProduct.quantity=count; 
-        const others=cart.filter(pd=>pd.key!==productToBeAdded);
-        newCart=[...others,sameProduct];//filter gives output as an array
-    }
-    else{
-        product.quantity=1;
-        newCart = [...cart,product];
+    if (sameProduct) {
+      count = sameProduct.quantity + 1;
+      sameProduct.quantityy = count;
+      const others = cart.filter((pd) => pd.key !== toBeAddedKey);
+      newCart = [...others, sameProduct];
+    } else {
+      product.quantity = 1;
+      newCart = [...cart, product];
     }
     setCart(newCart);
-    addToDatabaseCart(product.key,count);
-};
-//end of details of "add to cart" button
+    addToDatabaseCart(product.key, count);
+  };
 
-
-    return (
-        <div className="shop-container">
-
-
-           <div className="product-container">
-                {
-                    products.map(pd => <Product
-                        showAddToCart={true}
-                        handleAddProduct = {handleAddProduct}
-                         product={pd}
-                         key={pd.key}
-                         ></Product>)
-                }
-           </div> {/* product-container */}
-          
-          <div className="cart-container">
-              <Cart cart={cart}>
-              <Link to="/orderReview"><button className="main-button">Review Order</button></Link>
-              </Cart>
-          </div>
-            
-        </div> 
-        
-    );
+  return (
+    <div className="twin-container">
+      <div className="product-container">
+        {products.map((pd) => (
+          <Product
+            key={pd.key}
+            showAddToCart={true}
+            handleAddProduct={handleAddProduct}
+            product={pd}
+          ></Product>
+        ))}
+      </div>
+      <div className="cart-container">
+        <Cart cart={cart}>
+          <Link to="/review">
+            <button className="main-button">Review Order</button>
+          </Link>
+        </Cart>
+      </div>
+    </div>
+  );
 };
 
 export default Shop;
