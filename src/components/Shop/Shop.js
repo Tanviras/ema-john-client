@@ -6,18 +6,21 @@ import { Link } from "react-router-dom";
 import {
   addToDatabaseCart,
   getDatabaseCart,
-} from "../../utilities/databaseManager";
+} from "../../utilities/databaseManager"; //connection to database
 
 const Shop = () => {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState([]);//no initial products
+  const [cart, setCart] = useState([]);//no initial product in cart
 
+
+  // egula maybe pore add korse
   useEffect(() => {
     fetch("https://shrouded-sands-52244.herokuapp.com/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);
 
+   // egula maybe pore add korse
   useEffect(() => {
     const savedCart = getDatabaseCart();
     const productKeys = Object.keys(savedCart);
@@ -32,37 +35,56 @@ const Shop = () => {
       .then((data) => setCart(data));
   }, []);
 
-  const handleAddProduct = (product) => {
-    const toBeAddedKey = product.key;
-    const sameProduct = cart.find((pd) => pd.key === toBeAddedKey);
 
-    let count = 1;
+//handler of "add to cart"
+  const handleAddProduct = (product) => {//product selected
+    const toBeAddedKey = product.key;//key nilam
+    const sameProduct = cart.find((pd) => pd.key === toBeAddedKey);//cart a search kore proti ta product key niye oitar sathe mililam
+
+    let sameProductCount = 1;//same product kokhon hobe? jokhon age thekei oi jinishta ekbar thakbe
     let newCart;
-    if (sameProduct) {
-      count = sameProduct.quantity + 1;
-      sameProduct.quantityy = count;
-      const others = cart.filter((pd) => pd.key !== toBeAddedKey);
-      newCart = [...others, sameProduct];
-    } else {
-      product.quantity = 1;
-      newCart = [...cart, product];
+
+    if (sameProduct) {//jodi same product hoy
+      sameProductCount = sameProduct.quantity + 1;//sameproduct quantity increases
+      sameProduct.quantityy = sameProductCount; //updated
+      const others = cart.filter((pd) => pd.key !== toBeAddedKey);//others manei toh same key hobe na
+      newCart = [...others, sameProduct];//new cart contains both same products & others
+    } 
+    else {
+      product.quantity = 1;//jodi same product na hoy,then oita to unique, 1 in number
+      newCart = [...cart, product];//new cart contains ager jinishpati & ekhon selected product
     }
+
+
     setCart(newCart);
-    addToDatabaseCart(product.key, count);
+    addToDatabaseCart(product.key, sameProductCount);//local storage er moddhe rekhe dilam
   };
+
+
 
   return (
     <div className="twin-container">
+
+      {/* product-portion */}
       <div className="product-container">
-        {products.map((pd) => (
+        {
+        //ekhane products gulo ashlo kivabe? uporer 2 ta topic jegula pore asche,okhaner karshaji mone hoy
+        products.map(pd => (
           <Product
             key={pd.key}
             showAddToCart={true}
             handleAddProduct={handleAddProduct}
             product={pd}
           ></Product>
-        ))}
+        )
+        )
+        }
       </div>
+      {/* product-portion-end */}
+
+
+      {/* cart-portion */}
+
       <div className="cart-container">
         <Cart cart={cart}>
           <Link to="/review">
@@ -70,6 +92,8 @@ const Shop = () => {
           </Link>
         </Cart>
       </div>
+      {/* cart-portion-end */}
+
     </div>
   );
 };

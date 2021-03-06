@@ -14,7 +14,7 @@ const Review = () => {
   const history = useHistory();
 
   const handleProceedCheckout = () => {
-    history.push("/shipment");
+    history.push("/shipment");//shipment path is a private route,where login needed,onek karikuri kora ja pore kora hobe I guess
   };
 
   const removeProduct = (productKey) => {
@@ -54,7 +54,9 @@ const Review = () => {
         ))}
 
         {thankYou}
+
       </div>
+
       <div className="cart-container">
         <Cart cart={cart}>
           <button onClick={handleProceedCheckout} className="main-button">

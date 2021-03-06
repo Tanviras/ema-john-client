@@ -13,10 +13,10 @@ import { createContext } from "react";
 import { useState } from "react";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 
-export const UserContext = createContext();
+export const UserContext = createContext();//context api
 
 function App() {
-  const [loggedInUser, setLoggedInUser] = useState({});
+  const [loggedInUser, setLoggedInUser] = useState({});//initially no loggedInUser
   return (
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>

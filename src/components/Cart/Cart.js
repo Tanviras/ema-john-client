@@ -13,9 +13,11 @@ const Cart = (props) => {
   let shipping = 0;
   if (total > 35) {
     shipping = 0;
-  } else if (total > 15) {
+  } 
+  else if (total > 15) {
     shipping = 4.99;
-  } else if (total > 0) {
+  } 
+  else if (total > 0) {
     shipping = 12.99;
   }
 
@@ -41,6 +43,7 @@ const Cart = (props) => {
       <p>Total Price: {grandTotal}</p>
       <br />
       {props.children}
+      {/* eta na likhle review order likha ta thake na */}
     </div>
   );
 };
