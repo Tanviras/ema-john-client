@@ -16,6 +16,7 @@ import Shipment from './components/Shipment/Shipment';
 import Login from './components/Login/Login';
 import { createContext } from 'react';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import ShipmentDone from "./components/ShipmentDone/ShipmentDone";
 
 export const UserContext = createContext();
 
@@ -47,6 +48,9 @@ function App(props) {
           </Route>
           <Route path="/product/:productKey">
             <ProductDetail></ProductDetail>
+          </Route>
+          <Route path='/shipmentDone'>
+            <ShipmentDone></ShipmentDone>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
