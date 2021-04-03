@@ -12,7 +12,6 @@ const Shop = () => {
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
-
     //Initially sending data to database
     const handleSubmit=()=>{
         fetch("http://localhost:5000/shopProducts", {
@@ -79,6 +78,7 @@ const Shop = () => {
     return (
         <div className="twin-container">
             <div className="product-container">
+
                 {
                     products.map(pd => <Product 
                         key={pd.key}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { getDatabaseCart, removeFromDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import ReviewItem from '../ReviewItem/ReviewItem';
 import Cart from '../Cart/Cart';
-import happyImage from '../../images/giphy.gif';
 import { useHistory } from 'react-router-dom';
 
 const Review = () => {
@@ -39,10 +38,7 @@ const Review = () => {
 
 
 
-    // let thankyou;
-    // if(orderPlaced){
-    //     thankyou = <img src={happyImage} alt="happyImage"/>
-    // } 
+  
 
 
 
