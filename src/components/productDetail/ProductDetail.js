@@ -8,6 +8,7 @@ const ProductDetail = () => {
     const [loading,setLoading]=useState(true);
     const [product, setProduct] = useState({});
     document.title="product detail";
+    
     useEffect(() => {
         fetch('http://localhost:5000/product/'+ productKey)
         .then(res => res.json())

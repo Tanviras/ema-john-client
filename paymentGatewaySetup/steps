@@ -1,0 +1,9 @@
+react stripe install(https://stripe.com/docs/stripe-js/react)
+(ei site ei installation line er niche "demo in codesandbox" er moddhe ektu ghure ashte paro just for learning more)
+
+Then,go to 'dashboard'(https://dashboard.stripe.com/test/dashboard)
+Dashboard-Developers-API keys
+
+Elements Provider from https://stripe.com/docs/stripe-js/react. Copy the codes. Paste them in ProcessPayments.js. 
+
+Make necessray changes

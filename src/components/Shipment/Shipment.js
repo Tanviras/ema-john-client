@@ -5,6 +5,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../App';
 import { getDatabaseCart, processOrder } from '../../utilities/databaseManager';
 import { useHistory } from 'react-router';
+import ProcessPayments from '../ProcessPayment/ProcessPayment';
 
 
 const Shipment = () => {
@@ -39,7 +40,9 @@ const Shipment = () => {
   console.log(watch("example")); // watch input value by passing the name of it
 
   return (
-    <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
+    <div className="row">
+      <div className="col-6">
+      <form className="ship-form" onSubmit={handleSubmit(onSubmit)}>
       <input name="name" defaultValue={loggedInUser.name} ref={register({ required: true })} placeholder="Your Name" />
       {errors.name && <span className="error">Name is required</span>}
      
@@ -54,6 +57,14 @@ const Shipment = () => {
       
       <input type="submit" />
     </form>
+      </div>
+
+      <div className="col-6">
+        <h2>Pay here</h2>
+        <ProcessPayments></ProcessPayments>
+      </div>
+
+    </div>
   );
 };
 
