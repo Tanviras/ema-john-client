@@ -9,7 +9,7 @@ import SplitCardForm from './SplitCardForm';
 const stripePromise = loadStripe('pk_test_51IcYksH6xLdsHcKtrGc83DYVOtIcGtnyt0bGAFGfftveeJEQNsKnxiXyzxRbeVjBB3ByuMCveRjazwInBIV097qN00TraIFBUu');
 
 
-const ProcessPayments = () => {
+const ProcessPayments = ({handlePayment}) => {
     return (
 
         //copied from react stripe
@@ -17,7 +17,7 @@ const ProcessPayments = () => {
 
             {/* Instead of <MyCheckoutForm /> */}
             {/* Simple Card Form using 'CardElement' was used */}
-            <SimpleCardForm></SimpleCardForm>
+            <SimpleCardForm handlePayment={handlePayment}></SimpleCardForm>
 
             {/* Now we are using Split Card Form from sandbox */}
             {/* <SplitCardForm></SplitCardForm> */}
