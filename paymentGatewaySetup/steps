@@ -1,5 +1,5 @@
 react stripe install(https://stripe.com/docs/stripe-js/react)
-(ei site ei installation line er niche "demo in codesandbox" er moddhe ektu ghure ashte paro just for learning more)
+(ei site ei installation line er niche "demo in codesandbox"(https://codesandbox.io/s/react-stripe-official-q1loc?fontsize=14&hidenavigation=1&theme=dark) er moddhe ektu ghure ashte paro just for learning more)
 
 Then,go to 'dashboard'(https://dashboard.stripe.com/test/dashboard)
 Dashboard-Developers-API keys
@@ -7,3 +7,6 @@ Dashboard-Developers-API keys
 Elements Provider from https://stripe.com/docs/stripe-js/react. Copy the codes. Paste them in ProcessPayments.js. 
 
 Make necessray changes
+'Elements Components' theke CardElement use korechi as a change.
+There are other available elements components  apart from CardElement listed there which we can use. Moreover,there are demo in sandbox where you can find different structures and codes(https://codesandbox.io/s/react-stripe-official-q1loc?fontsize=14&hidenavigation=1&theme=dark)
+Customization and styling can also be used

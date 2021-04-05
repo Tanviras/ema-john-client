@@ -1,0 +1,15 @@
+https://firebase.google.com/docs/auth/admin/verify-id-tokens
+
+Retrieve ID tokens on clients:web
+
+Write a function in loginManager.js named setUserToken
+In that function, paste the whole part you have copied from "Retrieve ID tokens on clients:web"
+After the first line of that copied part, use sessionStorage.setItem('token',idToken)
+
+In loginManager.js, call that function inside handleGoogleSignIn before return
+
+
+
+
+In PrivateRoute,
+Instead of loggedInUser.email , use (loggedInUser.email || sessionStorage.getItem('token')

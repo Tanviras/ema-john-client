@@ -7,6 +7,15 @@ export const initializeLoginFramework = () => {
         firebase.initializeApp(firebaseConfig);
     }
 }
+//To verify id token(as the browser always needs to login after every refresh)
+const setUserToken=()=>{
+  firebase.auth().currentUser.getIdToken(true).then(function(idToken) {
+  sessionStorage.setItem('token',idToken);
+  })
+  .catch(function(error) {
+    // Handle error
+  });
+}
 
 export const handleGoogleSignIn = () => {
     const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -20,6 +29,7 @@ export const handleGoogleSignIn = () => {
         photo: photoURL,
         success: true
       };
+      setUserToken();
       return signedInUser;
     })
     .catch(err => {
