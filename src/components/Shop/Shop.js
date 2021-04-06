@@ -11,6 +11,11 @@ const Shop = () => {
     // const first10 = fakeData.slice(0,10);
     const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
+    //For search purpose
+    const [search,setSearch]=useState('');
+    const handleSearch=(event)=>{
+            setSearch(event.target.value);
+    }
 
     //Initially sending data to database
     const handleSubmit=()=>{
@@ -27,10 +32,10 @@ const Shop = () => {
 
 //data getting from database to show in shop
     useEffect(()=>{
-        fetch('http://localhost:5000/products')
+        fetch('http://localhost:5000/products?search='+search)
         .then(res => res.json())
         .then(data => setProducts(data))
-    }, [])
+    }, [search])
 
 
 
@@ -75,10 +80,16 @@ const Shop = () => {
 
 
 
+
     return (
         <div className="twin-container">
             <div className="product-container">
 
+                
+                {/* For search-purpose */}
+               <input type="text" onBlur={handleSearch} className="product-search" placeholder="Search"/>
+
+               
                 {
                     products.map(pd => <Product 
                         key={pd.key}
