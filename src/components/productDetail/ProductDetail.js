@@ -10,7 +10,7 @@ const ProductDetail = () => {
     document.title="product detail";
     
     useEffect(() => {
-        fetch('http://localhost:5000/product/'+ productKey)
+        fetch('https://shrouded-wildwood-19576.herokuapp.com/product/'+ productKey)
         .then(res => res.json())
         .then(data => {
             setProduct(data)

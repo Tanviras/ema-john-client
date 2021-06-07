@@ -29,7 +29,7 @@ const Shipment = () => {
       orderTime: new Date()
     };
 
-    fetch('http://localhost:5000/addOrder', {
+    fetch('https://shrouded-wildwood-19576.herokuapp.com/addOrder', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

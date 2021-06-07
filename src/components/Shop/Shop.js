@@ -20,14 +20,14 @@ const Shop = () => {
    
    //getting products from database
    useEffect(() => {
-    fetch("http://localhost:5000/getproducts")
+    fetch("https://shrouded-wildwood-19576.herokuapp.com/getproducts")
       .then((response) => response.json())
       .then((data) => setProducts(data));
   }, []);
 
     //Initially sending data to database
     const handleSubmit=()=>{
-        fetch("http://localhost:5000/shopProducts", {
+        fetch("https://shrouded-wildwood-19576.herokuapp.com/shopProducts", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(products),
@@ -40,7 +40,7 @@ const Shop = () => {
 
 //data getting from database to show in shop
     useEffect(()=>{
-        fetch('http://localhost:5000/products?search='+search)
+        fetch('https://shrouded-wildwood-19576.herokuapp.com/products?search='+search)
         .then(res => res.json())
         .then(data => setProducts(data))
     }, [search])
@@ -50,7 +50,7 @@ const Shop = () => {
     useEffect(()=>{
         const savedCart = getDatabaseCart();
         const productKeys = Object.keys(savedCart);
-        fetch('http://localhost:5000/productsByKeys', {
+        fetch('https://shrouded-wildwood-19576.herokuapp.com/productsByKeys', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

@@ -18,7 +18,7 @@ const Inventory = () => {
 
     // const handleAddProduct = () => {
     //     const product = {};
-    //     fetch('http://localhost:5000/addProduct', {
+    //     fetch('https://shrouded-wildwood-19576.herokuapp.com/addProduct', {
     //         method: 'POST',
     //         headers: {
     //             'Content-Type': 'application/json'
@@ -38,9 +38,8 @@ const Inventory = () => {
         formData.append("seller", info.seller);
         formData.append("stock", info.stock);
         formData.append("price", info.price);
-        formData.append("description", info.description);
 
-        fetch("http://localhost:5000/addProduct", {
+        fetch("https://shrouded-wildwood-19576.herokuapp.com/addProduct", {
             method: "POST",
             body: formData,
         })
