@@ -17,6 +17,14 @@ const Shop = () => {
             setSearch(event.target.value);
     }
 
+   
+   //getting products from database
+   useEffect(() => {
+    fetch("http://localhost:5000/getproducts")
+      .then((response) => response.json())
+      .then((data) => setProducts(data));
+  }, []);
+
     //Initially sending data to database
     const handleSubmit=()=>{
         fetch("http://localhost:5000/shopProducts", {

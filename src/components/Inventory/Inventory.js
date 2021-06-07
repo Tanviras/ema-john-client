@@ -13,7 +13,7 @@ const Inventory = () => {
         })
     }
     return (
-        <div>
+        <center>
             <form action="">
                 <p><span>Name: </span><input type="text"/></p>
                 <p><span>price: </span><input type="text"/></p>
@@ -21,8 +21,7 @@ const Inventory = () => {
                 <p><span>Product Image</span><input type="file"/></p>
                 <button onClick={handleAddProduct}>Add Product</button>
             </form>
-            
-        </div>
+        </center>
     );
 };
 
